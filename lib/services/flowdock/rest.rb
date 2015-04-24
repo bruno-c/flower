@@ -27,12 +27,14 @@ class Flower::Services::Flowdock
     end
 
     def flow_url(flow = nil)
-      url = "https://#{Flower::Config.api_token}@"
+      url = "https://#{Flower::Config.email}:#{Flower::Config.password}@"
       if flow
-        url + flow["url"].gsub("https://", "")
+        url += flow["url"].gsub("https://", "")
       else
-        url + "api.flowdock.com/flows/"
+        url += "api.flowdock.com/flows/"
       end
+      puts "url is #{url}"
+      url
     end
 
     def get_flow_from_message(message)
